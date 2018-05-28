@@ -20,7 +20,8 @@ setup_env() {
   cp "${ROOT}/kubo-lock/metadata" "${KUBO_ENVIRONMENT_DIR}/director.yml"
 
   "${ROOT}/git-kubo-deployment/bin/set_bosh_alias" "${KUBO_ENVIRONMENT_DIR}"
-  "${ROOT}/git-kubo-deployment/bin/set_kubeconfig" "${KUBO_ENVIRONMENT_DIR}" "${DEPLOYMENT_NAME}"
+  source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
+  "${ROOT}/git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 }
 
 main() {

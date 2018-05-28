@@ -22,7 +22,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 copy_state_and_creds() {
   cp "$PWD/gcs-bosh-creds/creds.yml" "${KUBO_ENVIRONMENT_DIR}/"
   cp "kubo-lock/metadata" "${KUBO_ENVIRONMENT_DIR}/director.yml"
-  "$PWD/git-kubo-deployment/bin/set_kubeconfig" "${KUBO_ENVIRONMENT_DIR}" "ci-service"
+  DEPLOYMENT_NAME="${DEPLOYMENT_NAME:="ci-service"}"
+  source "$PWD/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
+  "$PWD/git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 }
 
 if [ -z ${LOCAL_DEV+x} ] || [ "$LOCAL_DEV" != "1" ]; then

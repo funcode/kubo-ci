@@ -53,7 +53,8 @@ export DEBUG=0
 set -x
 export DEBUG=1
 
-"$KUBO_DEPLOYMENT_DIR/bin/set_kubeconfig" "${KUBO_ENVIRONMENT_DIR}" "${DEPLOYMENT_NAME}"
+source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
+"$KUBO_DEPLOYMENT_DIR/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 if [[ -z ${LOCAL_DEV+x} ]] || [[ "$LOCAL_DEV" != "1" ]]; then
   cp ~/.kube/config "${ROOT}/gcs-kubeconfig/config"
 fi

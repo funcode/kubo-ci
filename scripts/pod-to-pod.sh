@@ -18,7 +18,8 @@ client_secret=$(bosh int "${KUBO_ENVIRONMENT_DIR}/creds.yml" --path=/bosh_admin_
 
 director_ip=$(bosh int "${KUBO_ENVIRONMENT_DIR}/director.yml" --path="/internal_ip")
 
-"git-kubo-deployment/bin/set_kubeconfig" "${KUBO_ENVIRONMENT_DIR}" "${DEPLOYMENT_NAME}"
+source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
+"git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 
 kubectl apply -f "git-kubo-ci/specs/pod2pod-ns.yml"
 
