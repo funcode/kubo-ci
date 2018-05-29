@@ -12,7 +12,7 @@ export NEW_BOSH_STEMCELL_VERSION="$(cat ${ROOT}/new-bosh-stemcell/version)"
 
 main() {
   source "${ROOT}/git-kubo-ci/scripts/lib/utils.sh"
-  setup_env
+  setup_env "${KUBO_ENVIRONMENT_DIR}"
 
   local tmpfile="$(mktemp)" && echo "CONFIG=${tmpfile}"
   "${ROOT}/git-kubo-ci/scripts/generate-test-config.sh" ${KUBO_ENVIRONMENT_DIR} ${DEPLOYMENT_NAME} > "${tmpfile}"
