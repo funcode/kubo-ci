@@ -10,18 +10,8 @@ KUBO_ENVIRONMENT_DIR="${ROOT}/environment"
 export GOPATH="${ROOT}/git-kubo-ci"
 export NEW_BOSH_STEMCELL_VERSION="$(cat ${ROOT}/new-bosh-stemcell/version)"
 
-setup_env() {
-  mkdir -p "${KUBO_ENVIRONMENT_DIR}"
-  cp "${ROOT}/gcs-bosh-creds/creds.yml" "${KUBO_ENVIRONMENT_DIR}/"
-  cp "${ROOT}/kubo-lock/metadata" "${KUBO_ENVIRONMENT_DIR}/director.yml"
-
-  "${ROOT}/git-kubo-deployment/bin/set_bosh_alias" "${KUBO_ENVIRONMENT_DIR}"
-  "${ROOT}/git-kubo-deployment/bin/credhub_login" "${KUBO_ENVIRONMENT_DIR}"
-  source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
-  "${ROOT}/git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
-}
-
 main() {
+  source "${ROOT}/git-kubo-ci/scripts/lib/utils.sh"
   setup_env
 
   local tmpfile="$(mktemp)" && echo "CONFIG=${tmpfile}"
