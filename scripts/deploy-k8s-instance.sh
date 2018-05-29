@@ -52,7 +52,7 @@ export DEBUG=0
 "$KUBO_DEPLOYMENT_DIR/bin/deploy_k8s" "${KUBO_ENVIRONMENT_DIR}" "${DEPLOYMENT_NAME}" "$release_source"
 set -x
 export DEBUG=1
-
+"${ROOT}/git-kubo-deployment/bin/credhub_login" "${KUBO_ENVIRONMENT_DIR}"
 source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
 "$KUBO_DEPLOYMENT_DIR/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 if [[ -z ${LOCAL_DEV+x} ]] || [[ "$LOCAL_DEV" != "1" ]]; then
