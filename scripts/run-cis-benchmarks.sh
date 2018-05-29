@@ -23,6 +23,7 @@ copy_state_and_creds() {
   cp "$PWD/gcs-bosh-creds/creds.yml" "${KUBO_ENVIRONMENT_DIR}/"
   cp "kubo-lock/metadata" "${KUBO_ENVIRONMENT_DIR}/director.yml"
   DEPLOYMENT_NAME="${DEPLOYMENT_NAME:="ci-service"}"
+  "$PWD/git-kubo-deployment/bin/credhub_login" "${KUBO_ENVIRONMENT_DIR}"
   source "$PWD/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
   "$PWD/git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 }

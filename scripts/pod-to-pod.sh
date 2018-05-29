@@ -18,6 +18,7 @@ client_secret=$(bosh int "${KUBO_ENVIRONMENT_DIR}/creds.yml" --path=/bosh_admin_
 
 director_ip=$(bosh int "${KUBO_ENVIRONMENT_DIR}/director.yml" --path="/internal_ip")
 
+"${ROOT}/git-kubo-deployment/bin/credhub_login" "${KUBO_ENVIRONMENT_DIR}"
 source "${ROOT}/git-kubo-ci/scripts/get_kubeconfig_vars.sh"
 "git-kubo-deployment/bin/set_kubeconfig" "${cluster_name}" "${api_url}"
 
