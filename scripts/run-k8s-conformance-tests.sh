@@ -27,11 +27,6 @@ main() {
     generate_config
   fi
 
-  if [[ -z "${KUBECONFIG+x}" ]]; then
-    echo "KUBECONFIG was not set"
-    exit 1
-  fi
-
   ginkgo -progress -v "${GOPATH}/src/tests/conformance"
 }
 
